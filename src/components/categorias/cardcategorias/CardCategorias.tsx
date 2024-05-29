@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Categoria from "../../../models/Categoria";
+import FormCategoria from "../formcategoria/FormCategoria";
 
 interface CardCategoriaProps {
     categoria: Categoria
 }
 
-function CardCategorias({categoria}: CardCategoriaProps) {
+<Routes>
+          <Route path="/cardcategorias" element={<FormCategoria/>} />
+          <Route path="/editarcategoria/:id" element={<FormCategoria />} />
+        </Routes>
+
+function CardCategorias({categoria}: CardCategoriaProps){
     return (
         <div className='border-slate-900 border 
             flex flex-col rounded overflow-hidden justify-between'>
@@ -21,12 +27,12 @@ function CardCategorias({categoria}: CardCategoriaProps) {
                 </div>
             </div>
             <div className="flex">
-                <Link to={`/editarpostagem/${categoria.id}`} 
+                <Link to={`/editarcategoria/${categoria.id}`} 
                     className='w-full text-white bg-indigo-400 
                     hover:bg-indigo-800 flex items-center justify-center py-2'>
                     <button>Editar</button>
                 </Link>
-                <Link to={`/deletarpostagem/${categoria.id}`} 
+                <Link to={`/deletarcategoria/${categoria.id}`} 
                     className='text-white bg-red-400 
                     hover:bg-red-700 w-full flex items-center justify-center'>
                     <button>Deletar</button>
@@ -36,4 +42,4 @@ function CardCategorias({categoria}: CardCategoriaProps) {
     );
 }
 
-export default CardCategorias;
+export default CardCategoriaProps;

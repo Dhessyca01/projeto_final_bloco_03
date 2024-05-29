@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import { RotatingLines } from "react-loader-spinner";
 import Categoria from "../../../models/Categoria";
-import { atualizar, buscar, cadastrar } from "../../../services/Service";
+import { atualizar, cadastrar, listar } from "../../../services/Service";
 
 function FormCategoria() {
   const navigate = useNavigate();
@@ -13,11 +13,16 @@ function FormCategoria() {
 
   async function buscarPorId(id: string) {
       try {
-          await buscar(`/categorias/${id}`, setCategoria);
+          await listar(`/categorias/${id}`, setCategoria);
       } catch (error: any) {
           alert("Categoria não encontrada!");
           retornar();
       }
+
+      <Routes>
+          <Route path="/cadastrarcategoria" element={<FormCategoria />} />
+          <Route path="/editarcategoria/:id" element={<FormCategoria />} />
+        </Routes>
   }
 
   useEffect(() => {
@@ -63,7 +68,7 @@ function FormCategoria() {
   return (
       <>
           <div className="container flex flex-col items-center justify-center mx-auto">
-              <h1 className="text-3xl font-Helvetica  text-center my-8">
+              <h1 className="text-3xl font-[Lora] font-bold text-center my-8">
                   {id === undefined ? 'Cadastrar Categoria' : 'Editar Categoria'}
               </h1>
 

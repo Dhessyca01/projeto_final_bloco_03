@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Categoria from "../../models/Categoria";
 import { useNavigate, useParams } from "react-router-dom";
-import { buscar } from "../../services/Service";
 import { RotatingLines } from "react-loader-spinner";
 import FormCategoria from "../../components/categorias/formcategoria/FormCategoria";
 import DeletarCategoria from "../../components/categorias/deletarcategoria/DeletarCategoria";
 import Popup from "reactjs-popup";
+import { listar } from "../../services/Service";
 
 
 function CategoriaPage() {
@@ -18,7 +18,7 @@ function CategoriaPage() {
 
   async function buscarPorId(id: string) {
     try {
-      await buscar(`/categorias/${id}`, setCategoria);
+      await listar(`/categorias/${id}`, setCategoria);
     } catch (error: any) {
       if (error.toString().includes("403")) {
         navigate("/");

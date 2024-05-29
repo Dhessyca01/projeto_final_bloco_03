@@ -1,14 +1,14 @@
 const usuario = {
     nome: "Root",
     usuario: "root@root.com",
-    foto: "https://i.imgur.com/Sk5SjWE.jpg",
+    foto: "https://ik.imagekit.io/vmo8ef1xo/Projeto%20blogpessoal/view-3d-confident-businessman.jpg?updatedAt=1716405278644",
   };
   
   function Perfil() {
     return (
       <div className="rounded-2xl overflow-hidden py-8">
         <div className="container">
-          <img className="w-full h-72 object-cover border-b-8 border-white" src="https://i.imgur.com/ZZFAmzo.jpg" alt="Capa do Perfil" />
+          <img className="w-full h-72 object-cover border-b-8 border-white" src="https://ik.imagekit.io/vmo8ef1xo/Projeto%20blogpessoal/user-6380868_1280.png?updatedAt=1716917965513" alt="Capa do Perfil" />
   
           <img className="rounded-full w-56 mx-auto mt-[-8rem] border-8 border-white relative z-10" src={usuario.foto} alt={`Foto de perfil de ${usuario.nome}`} />
   

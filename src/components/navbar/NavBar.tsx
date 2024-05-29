@@ -7,7 +7,7 @@ function Navbar() {
         <div className='w-full bg-orange-600 text-white flex justify-center py-2'>
         <div className="  flex justify-center gap-1 text-lg">
         <Pill size={62} weight="thin" />
-        <Link to="/home" className="gap-5 text-3xl ms-8 font-mono font-bold uppercase hover:text-blue-800 cursor-pointer">FarmFair</Link>
+        <Link to="/home" className="gap-5 text-3xl ms-8 font-mono font-bold uppercase hover:text-blue-800 cursor-pointer">FarmaFair</Link>
         </div>        
         
         <div className="flex justify-center">
@@ -22,7 +22,7 @@ function Navbar() {
                 <div className="flex justify-center gap-5">
                     <p className="hover:text-black">Produtos</p>
                     <Link to="/categorias" className="hover:text-black">Categorias</Link>
-                    <Link to="/cadcategoria" className="hover:text-black">Cadastrar categorias</Link>
+                    <Link to="/cadastrarcategoria" className="hover:text-black">Cadastrar categorias</Link>
                     <div className="hover:text-black"><User size={32} weight="thin" /></div>
                     <div className="hover:text-black"><ShoppingCartSimple size={32} weight="thin" /></div>
 
