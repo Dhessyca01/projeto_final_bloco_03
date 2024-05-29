@@ -1,17 +1,16 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Categoria from "../../../models/Categoria";
-import FormCategoria from "../formcategoria/FormCategoria";
+import ListarCategorias from "../listarcategorias/ListarCategorias";
 
-interface CardCategoriaProps {
+interface CardCategoria {
     categoria: Categoria
 }
 
 <Routes>
-          <Route path="/cardcategorias" element={<FormCategoria/>} />
-          <Route path="/editarcategoria/:id" element={<FormCategoria />} />
+<Route path="/categorias" element={<ListarCategorias />} />
         </Routes>
 
-function CardCategorias({categoria}: CardCategoriaProps){
+function CardCategoria({categoria}: CardCategoria){
     return (
         <div className='border-slate-900 border 
             flex flex-col rounded overflow-hidden justify-between'>
@@ -42,4 +41,4 @@ function CardCategorias({categoria}: CardCategoriaProps){
     );
 }
 
-export default CardCategoriaProps;
+export default CardCategoria;
