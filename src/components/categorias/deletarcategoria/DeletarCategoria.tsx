@@ -1,63 +1,52 @@
 
 import { useState, useEffect } from "react";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 
 import { RotatingLines } from "react-loader-spinner";
 import Categoria from "../../../models/Categoria";
-import {  deletar, listar } from "../../../services/Service";
-import ListarCategorias from "../listarcategorias/ListarCategorias";
+import {  buscar, deletar} from "../../../services/Service";
 
-
-<Routes>
-          <Route path="/deletarcategoria/:id" element={<DeletarCategoria />} />
-          <Route path="/categorias" element={<ListarCategorias />} />
-          </Routes>
 
 function DeletarCategoria() {
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
-
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [categoria, setCategoria] = useState<Categoria>({} as Categoria)
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
 
     const { id } = useParams<{ id: string }>();
 
     async function buscarPorId(id: string) {
         try {
-            await listar(`/categorias/${ id }`, setCategoria)
+            await buscar(`/categorias/${id}`, setCategoria);
         } catch (error: any) {
-            alert('Categoria não encontrado!')
+            alert("Categoria não encontrada!");
         }
-
     }
 
     useEffect(() => {
         if (id !== undefined) {
-            buscarPorId(id)
+            buscarPorId(id);
         }
-    }, [id]),
+    }, [id])
 
-    async function deletarCategoria() {
-        setIsLoading(true)
-
+    async function DeletarCategoria() {
+        setIsLoading(true);
         try {
-            await deletar(`/categorias/${ id }`)
-
-            alert('Categoria apagada com sucesso')
-
+            await deletar(`/categorias/${id}`)
+            alert("Categoria apagada com sucesso");
         } catch (error) {
-            alert('Erro ao apagar a categoria')
+            alert("Erro ao apagar a categoria");
         }
-
-        setIsLoading(false)
-        retornar()
+        setIsLoading(false);
+        retornar();
     }
 
     function retornar() {
-        navigate("/categorias")
+        navigate("/categorias");
     }
 
     return (
+        <>
         <div className='container min-h-[70vh] flex flex-col justify-center items-center mx-auto'>
             <h1 className='text-4xl text-center py-4'>Deletar Categoria</h1>
             <p className='text-center font-semibold mb-4'>
@@ -90,12 +79,12 @@ function DeletarCategoria() {
                             /> :
                             <span>Sim</span>
                         }
-                    </button>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
-export default DeletarCategoria
-
+export default DeletarCategoria;
 

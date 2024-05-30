@@ -1,70 +1,74 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Route, Routes, useNavigate, useParams } from "react-router-dom";
-import { RotatingLines } from "react-loader-spinner";
+import { useNavigate, useParams } from "react-router-dom";
 import Categoria from "../../../models/Categoria";
-import { atualizar, cadastrar, listar } from "../../../services/Service";
+import { atualizar, buscar, cadastrar} from "../../../services/Service";
+import { RotatingLines } from "react-loader-spinner";
 
 function FormCategoria() {
+
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>();
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
 
+  const { id } = useParams<{ id: string }>();
+
   async function buscarPorId(id: string) {
       try {
-          await listar(`/categorias/${id}`, setCategoria);
+          await buscar(`/categorias/${id}`, setCategoria)
       } catch (error: any) {
-          alert("Categoria não encontrada!");
+          alert('Categoria não encontrada!')
           retornar();
       }
-
-      <Routes>
-          <Route path="/cadastrarcategoria" element={<FormCategoria />} />
-          <Route path="/editarcategoria/:id" element={<FormCategoria />} />
-        </Routes>
   }
 
   useEffect(() => {
       if (id !== undefined) {
-          buscarPorId(id);
+          buscarPorId(id)
       }
   }, [id])
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-          setCategoria({
+      setCategoria({
           ...categoria,
           [e.target.name]: e.target.value
       })
   }
 
   async function gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>) {
-      e.preventDefault();
-      setIsLoading(true);
+      e.preventDefault()
+      setIsLoading(true)
+
       if (id !== undefined) {
           try {
-              await atualizar("/categorias", categoria, setCategoria);
-              alert("Categoria atualizada com sucesso");
+              await atualizar(`/categorias`, categoria, setCategoria)
+
+              alert('Categoria atualizado com sucesso')
 
           } catch (error: any) {
-              alert("Erro ao atualizar Categoria");
+              alert('Erro ao atualizar o Categoria')
           }
+
       } else {
           try {
-              await cadastrar("/categorias", categoria, setCategoria);
-              alert("Categoria cadastrada com sucesso");
+              await cadastrar(`/categorias`, categoria, setCategoria)
+
+              alert('Categoria cadastrada com sucesso')
+
           } catch (error: any) {
-              alert("Erro ao cadastrar Categoria");
+              alert('Erro ao cadastrar a Categoria')
           }
       }
-      setIsLoading(false);
+
+      setIsLoading(false)
       retornar();
+
   }
 
   function retornar() {
-      navigate("/categorias");
+      navigate("/categorias")
   }
-  
+
   return (
       <>
           <div className="container flex flex-col items-center justify-center mx-auto">
@@ -86,7 +90,7 @@ function FormCategoria() {
                           animationDuration="0.75"
                           width="24"
                           visible={true}
-                          /> : <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
+                          /> : <span>{id === undefined ? 'Cadastrar' : 'Atualizar'}</span>
                       }
                   </button>
               </form>

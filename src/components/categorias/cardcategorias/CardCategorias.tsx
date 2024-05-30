@@ -1,44 +1,29 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Categoria from "../../../models/Categoria";
-import ListarCategorias from "../listarcategorias/ListarCategorias";
 
-interface CardCategoria {
+interface CardCategoriasProps {
     categoria: Categoria
-}
+    }
+    
+    function CardCategorias({ categoria }: CardCategoriasProps) {
+        return (
+        <>
+            <div className="border flex flex-col rounded-2xl overflow-hidden justify-between">
+                <header className="py-2 px-6 bg-blue-300 text-2xl font-[Lora] font-bold">Categoria</header>
+                <p className="p-8 text-3xl bg-blue-100 h-full">{categoria.nome}</p>
 
-<Routes>
-<Route path="/categorias" element={<ListarCategorias />} />
-        </Routes>
-
-function CardCategoria({categoria}: CardCategoria){
-    return (
-        <div className='border-slate-900 border 
-            flex flex-col rounded overflow-hidden justify-between'>
-                
-            <div>
-                <div className="flex w-full bg-indigo-400 py-2 px-4 items-center gap-4">
-                    <h3 className='text-lg font-bold text-center uppercase'>
-                        {categoria.nome}
-                    </h3>
-                </div>
-                <div className='p-4 '>
-                    <h4 className='text-3xl bg-blue-100 h-full'>{categoria.nome}</h4>
+                <div className="flex">
+                    <Link to={`/editarcategoria/${categoria.id}`} className="w-full text-white bg-blue-400 hover:bg-blue-500 flex items-center justify-center py-2">
+                        <button >Editar</button>
+                    </Link>
+                    
+                    <Link to={`/deletarcategoria/${categoria.id}`} className="w-full text-white bg-red-400 hover:bg-red-500 flex items-center justify-center py-2">
+                        <button >Deletar</button>
+                    </Link>
                 </div>
             </div>
-            <div className="flex">
-                <Link to={`/editarcategoria/${categoria.id}`} 
-                    className='w-full text-white bg-indigo-400 
-                    hover:bg-indigo-800 flex items-center justify-center py-2'>
-                    <button>Editar</button>
-                </Link>
-                <Link to={`/deletarcategoria/${categoria.id}`} 
-                    className='text-white bg-red-400 
-                    hover:bg-red-700 w-full flex items-center justify-center'>
-                    <button>Deletar</button>
-                </Link>
-            </div>
-        </div>
-    );
+        </>
+    )
 }
 
-export default CardCategoria;
+export default CardCategorias;

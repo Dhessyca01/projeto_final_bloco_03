@@ -22,7 +22,7 @@ function Navbar() {
                 <div className="flex justify-center gap-5">
                     <p className="hover:text-black">Produtos</p>
                     <Link to="/categorias" className="hover:text-black">Categorias</Link>
-                    <Link to="/cadastrarcategoria" className="hover:text-black">Cadastrar categorias</Link>
+                    <Link to="/cadastrarcategoria" className="hover:text-black">Cadastrar categoria</Link>
                     <div className="hover:text-black"><User size={32} weight="thin" /></div>
                     <div className="hover:text-black"><ShoppingCartSimple size={32} weight="thin" /></div>
 
@@ -33,8 +33,8 @@ function Navbar() {
             </div>
             <span className="sr-only">Carrinho</span>
           </button>
-                </div>
-            </div>
+         </div>
+    </div>
         </>
     )
 }
