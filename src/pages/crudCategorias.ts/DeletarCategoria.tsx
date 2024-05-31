@@ -3,29 +3,32 @@ import { useState, useEffect } from "react";
 import {useNavigate, useParams } from "react-router-dom";
 
 import { RotatingLines } from "react-loader-spinner";
-import Categoria from "../../../models/Categoria";
-import {  buscar, deletar} from "../../../services/Service";
+import Categoria from "../../model/Categoria";
+import {  listar, deletar} from "../../services/Service";
+import { toastAlerta } from "../../utils/toastAlerta";
 
 
 function DeletarCategoria() {
+    
     const navigate = useNavigate();
 
-    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
 
     const { id } = useParams<{ id: string }>();
 
-    async function buscarPorId(id: string) {
+    async function listarPorId(id: string) {
         try {
-            await buscar(`/categorias/${id}`, setCategoria);
+            await listar(`/categorias/${id}`, setCategoria);
         } catch (error: any) {
-            alert("Categoria não encontrada!");
+            toastAlerta("Categoria não encontrada!","info");
         }
     }
 
     useEffect(() => {
         if (id !== undefined) {
-            buscarPorId(id);
+            listarPorId(id);
         }
     }, [id])
 
@@ -33,9 +36,9 @@ function DeletarCategoria() {
         setIsLoading(true);
         try {
             await deletar(`/categorias/${id}`)
-            alert("Categoria apagada com sucesso");
+            toastAlerta("Categoria apagada com sucesso", "info");
         } catch (error) {
-            alert("Erro ao apagar a categoria");
+            toastAlerta("Erro ao apagar a categoria", "info");
         }
         setIsLoading(false);
         retornar();
@@ -47,26 +50,25 @@ function DeletarCategoria() {
 
     return (
         <>
-        <div className='container min-h-[70vh] flex flex-col justify-center items-center mx-auto'>
-            <h1 className='text-4xl text-center py-4'>Deletar Categoria</h1>
-            <p className='text-center font-semibold mb-4'>
+        <div className='text-[#0E0E0E] text-lg bg-[#F0E68C]  w-full flex flex-col justify-center items-center w-full'>
+            <h1 className='text-4xl text-center py-4 font-bold'>Deletar Categoria</h1>
+            <p className='text-3xl text-center text-[#FF0000] font-bold mb-10'>
                 Você tem certeza de que deseja apagar a categoria a seguir?</p>
-            <div className='border flex flex-col rounded-2xl w-1/3 overflow-hidden justify-between'>
+            <div className='text-center border flex flex-col rounded-4xl w-full justify-between'>
                 <header
-                    className='py-2 px-6 bg-slate-400 text-white font-bold text-2xl'>
+                    className='py-2 px-6 bg-[#FFD700] text-[#0E0E0E] font-bold text-2xl'>
                     Categoria
                 </header>
-                <p className='p-8 text-3xl text-center bg-white h-full'>{categoria.nome}</p>
+                <p className='text-[#FFFFFF] p-9 text-4xl text-center bg-[#8FBC8F] w-full'>{categoria.nome}</p>
                 <div className="flex">
                     <button
-                        className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2'
+                        className='text-3xl bg-[#FFFFFF] hover:bg-[#008B8B] w-full py-4'
                         onClick={retornar}
                     >
                         Não
                     </button>
                     <button
-                        className='w-full text-slate-100 bg-teal-400 hover:bg-teal-700
-                        flex items-center justify-center'
+                        className='w-full text-3xl bg-[#FFFFFF] hover:bg-[#008B8B] w-full py-4'
                         onClick={DeletarCategoria}
                     >
                         {isLoading ?

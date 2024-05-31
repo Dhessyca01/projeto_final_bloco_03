@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/NavBar";
-import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
-import ListarCategorias from "./components/categorias/listacategorias/ListarCategorias";
-import FormCategoria from "./components/categorias/formcategoria/FormCategoria";
-import DeletarCategoria from "./components/categorias/deletarcategoria/DeletarCategoria";
+import ListarCategorias from "./pages/listaCategorias/ListaCategoria";
+import FormCategoria from "./pages/crudCategorias.ts/FormCategoria";
+import DeletarCategoria from "./pages/crudCategorias.ts/DeletarCategoria";
+import HomePage from "./pages/home/Home";
+import Cadastrarcategoria from "./pages/crudCategorias.ts/FormCategoria";
 
 
 function App() {
@@ -13,24 +14,18 @@ function App() {
 
        <BrowserRouter>
         <Navbar />
-        
-        <div className="min-h-[68vh]">
-          <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/" element={<Home />} />
-
+        <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route path="/categorias" element={<ListarCategorias />} />
-            <Route path="/cadcategoria" element={<FormCategoria />} />
+            <Route path="/cadastrar" element={<Cadastrarcategoria />} />
             <Route path="/editarcategoria/:id" element={<FormCategoria />} />
             <Route path="/deletarcategoria/:id" element={<DeletarCategoria />} />
-          </Routes>
-        </div>
-    
-
+            
+            </Routes>
         <Footer />
       </BrowserRouter>
       </>
-  );
+  )
 }
 
-export default App;
+export default App
