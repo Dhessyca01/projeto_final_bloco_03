@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import ListaCategorias from "../../components/categorias/listaCategorias/ListaCategoria";
 
 function Home () {
 
     return (
-
+<>
         <div className=" bg-[#66CDAA] flex justify-center py-12">
             <div className="container grid grid-cols-2 text-white">
         
@@ -32,6 +33,8 @@ function Home () {
                     </div>
              </div>
             </div>
+            <ListaCategorias/>
+            </>
 
             
     )

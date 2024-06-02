@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import {useNavigate, useParams } from "react-router-dom";
 
 import { RotatingLines } from "react-loader-spinner";
-import Categoria from "../../model/Categoria";
-import {  listar, deletar} from "../../services/Service";
-import { toastAlerta } from "../../utils/toastAlerta";
+import Categoria from "../../../model/Categoria";
+import { buscar, deletar} from "../../../services/Service";
+import { toastAlerta } from "../../../utils/toastAlerta";
 
 
 function DeletarCategoria() {
@@ -20,7 +20,7 @@ function DeletarCategoria() {
 
     async function listarPorId(id: string) {
         try {
-            await listar(`/categorias/${id}`, setCategoria);
+            await buscar(`/categorias/${id}`, setCategoria);
         } catch (error: any) {
             toastAlerta("Categoria não encontrada!","info");
         }
